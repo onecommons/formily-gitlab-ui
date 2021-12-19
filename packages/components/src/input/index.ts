@@ -1,17 +1,12 @@
-import {composeExport, transformComponent} from '../__builtins__/shared'
-import {connect, mapProps,} from '@formily/vue'
-import {GlFormInput as GlInput} from '@gitlab/ui'
-
+import { composeExport, transformComponent } from '../__builtins__/shared'
+import { connect, mapProps } from '@formily/vue'
+import { GlFormInput as GlInput } from '@gitlab/ui'
 
 const TransformElInput = transformComponent<{}>(GlInput, {
   change: 'input',
 })
 
-const InnerInput = connect(
-  TransformElInput,
-  mapProps({readOnly: 'readonly'}),
-)
-
+const InnerInput = connect(TransformElInput, mapProps({ readOnly: 'disabled' }))
 
 export const Input = composeExport(InnerInput, {})
 
