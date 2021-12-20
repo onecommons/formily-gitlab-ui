@@ -1,14 +1,25 @@
 <template>
-  <Form :form="form">
-    <SchemaField :schema="schema" />
+  <FormProvider :form="form">
+    <SchemaField :schema="{
+      type: 'object',
+      properties: {
+        input: {
+          type: 'string',
+          title: '输入框',
+          // 'x-decorator': 'FormItem',
+          'x-component': 'Input',
+        },
+    }}">
+
+    </SchemaField>
     <Submit @submit="onSubmit">提交</Submit>
-  </Form>
+  </FormProvider>
 </template>
 
 <script>
-import { createForm } from '@formily/core'
-import { createSchemaField } from '@formily/vue'
-import { Form, FormItem, Input, Submit } from '@formily/gitlab-ui'
+import {createForm} from '@formily/core'
+import {FormProvider, createSchemaField} from '@formily/vue'
+import {Form, FormItem, Input, Submit} from '@formily/gitlab-ui'
 
 const schema = {
   type: 'object',
@@ -16,20 +27,20 @@ const schema = {
     input: {
       type: 'string',
       title: '输入框',
-      'x-decorator': 'FormItem',
+      // 'x-decorator': 'FormItem',
       'x-component': 'Input',
     },
-    textarea: {
-      type: 'string',
-      title: '文本框',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input.TextArea',
-    },
+    // textarea: {
+    //   type: 'string',
+    //   title: '文本框',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'Input.TextArea',
+    // },
   },
 }
 
 const form = createForm()
-const { SchemaField } = createSchemaField({
+const {SchemaField} = createSchemaField({
   components: {
     FormItem,
     Input,
@@ -37,7 +48,7 @@ const { SchemaField } = createSchemaField({
 })
 
 export default {
-  components: { Form, SchemaField, Submit },
+  components: {Form, SchemaField, Submit, Input, FormProvider},
   data() {
     return {
       form,
